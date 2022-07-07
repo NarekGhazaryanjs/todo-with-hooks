@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Button from "./Components/Button/Button"
 import List from "./Components/List/List"
 import Listitem from "./Components/Listitem/Listitem"
 import Text from "./Components/Text/Text"
@@ -40,6 +41,11 @@ const App = () => {
     }, 
   ])
 
+  const deleteUser = (id) => {
+     const newUserList = userList.filter(user => user.id !== id);
+     setUserList(newUserList)
+  }
+
   return (
     <Wrapper>
        <List>
@@ -52,6 +58,7 @@ const App = () => {
                 <Text> {user.age} </Text>
                 <Text> {user.hobby} </Text>
                 <Text> {user.range} </Text>
+                <Button onClick={() => deleteUser(user.id)}> delete user </Button>
               </Listitem>
             )
           })
