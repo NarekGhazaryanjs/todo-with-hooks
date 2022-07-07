@@ -5,7 +5,10 @@ import List from "./Components/List/List"
 import Listitem from "./Components/Listitem/Listitem"
 import Text from "./Components/Text/Text"
 import Card from "./ui/Card/Card"
-import Wrapper from "./ui/Wrapper/Wrapper"
+import Wrapper from "./ui/Wrapper/Wrapper";
+import classes from './ui/Global.module.css'
+import './App.css';
+
 
 const App = () => {
   const [userList,setUserList] = useState([
@@ -95,36 +98,42 @@ const App = () => {
 
   return (
     <Wrapper>
-      <Card>
+      <Card className={classes.container}>
+      <Card className={classes['new-user-container']}> 
+      <Card className={classes.block}>
         <Text>search user by name</Text>
         <Input placeholder='search user by name' onChange={changeNameHandler} type='text' />
       </Card>
-      <Card>
+      </Card>
+      <Card className={classes['new-user-container']}> 
+      <Card className={classes.block}>
         <Text> new user Name </Text>
         <Input propsRef={newUserName}  placeholder='write new user name' type='text'/>
       </Card>
-      <Card>
+      <Card className={classes.block}>
         <Text> new user Surname </Text>
         <Input propsRef={newUserName}  placeholder='write new user surname' type='text'/>
       </Card>
-      <Card>
+      <Card className={classes.block}>
         <Text> new user age </Text>
         <Input propsRef={newUserAge}  placeholder='write new user age' type='number'/>
       </Card>
-      <Card>
+      <Card className={classes.block}>
         <Text> new user hobby </Text>
         <Input propsRef={newUserRange}  placeholder='write new user hobby' type='text'/>
       </Card>
-      <Card>
+       <Card className={classes.block}>
         <Text> new user range </Text>
         <Input propsRef={newUserHobby}  placeholder='write new user range' type='text'/>
         <Button onClick={addUser}> add user </Button>
       </Card>
-       <List>
+      </Card>
+     
+       <List className={classes.list} >
         {
           userList.filter(filterByName).map(user => {
             return (
-              <Listitem key={user.id}>
+              <Listitem className={classes['list-item']}  key={user.id}>
                 <Text> {user.name} </Text>
                 <Text> {user.surname} </Text>
                 <Text> {user.age} </Text>
@@ -136,6 +145,7 @@ const App = () => {
           })
         }
        </List>
+       </Card>
     </Wrapper>
   )
 }

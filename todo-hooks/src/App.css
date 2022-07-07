@@ -3,3 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+button {
+  background-color: black;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 2px
+}
+
+button:hover {
+  border: 2px solid gray ;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+input {
+   padding: 8px;
+}
