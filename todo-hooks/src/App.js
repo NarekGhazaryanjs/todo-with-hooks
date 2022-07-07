@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import Button from "./Components/Button/Button"
 import Input from "./Components/Input/Input"
 import List from "./Components/List/List"
@@ -49,6 +49,7 @@ const App = () => {
   const newUserHobby = useRef('');
   const newUserRange = useRef('');
   const [nextUserId,setNextUserId] = useState(5);
+  const [searchName,setSearchName] = useState('');
 
 
   const deleteUser = (id) => {
@@ -82,8 +83,22 @@ const App = () => {
      return
   }
 
+  const changeNameHandler = (event) => {
+    setSearchName(event.target.value)
+  }
+
+  const filterByName = useCallback(
+    (item) => {
+      return item.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
+    }, [searchName]
+  )
+
   return (
     <Wrapper>
+      <Card>
+        <Text>search user by name</Text>
+        <Input placeholder='search user by name' onChange={changeNameHandler} type='text' />
+      </Card>
       <Card>
         <Text> new user Name </Text>
         <Input propsRef={newUserName}  placeholder='write new user name' type='text'/>
@@ -107,7 +122,7 @@ const App = () => {
       </Card>
        <List>
         {
-          userList.map(user => {
+          userList.filter(filterByName).map(user => {
             return (
               <Listitem key={user.id}>
                 <Text> {user.name} </Text>
